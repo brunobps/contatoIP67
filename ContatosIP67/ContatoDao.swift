@@ -11,19 +11,20 @@ import Foundation
 
 class ContatoDao: NSObject {
     
+    //Singleton= garante uma unica instancia da classe.
     static private var defaultDAO: ContatoDao!
-    var contatos: Array<Contato>
-    
-    func adiciona(_ contato:Contato){
-        contatos.append(contato)
-    }
-    
     static func sharedInstance() -> ContatoDao{
         
         if defaultDAO == nil {
             defaultDAO =  ContatoDao()
         }
         return defaultDAO
+    }
+    
+    var contatos: Array<Contato>
+    
+    func adiciona(_ contato:Contato){
+        contatos.append(contato)
     }
     
     override private init(){
