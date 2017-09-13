@@ -14,6 +14,7 @@
 		C02B1DCC1F689732009F9465 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C02B1DCB1F689732009F9465 /* Assets.xcassets */; };
 		C02B1DCF1F689732009F9465 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C02B1DCD1F689732009F9465 /* LaunchScreen.storyboard */; };
 		C02B1DD91F689F5C009F9465 /* Contato.m in Sources */ = {isa = PBXBuildFile; fileRef = C02B1DD81F689F5C009F9465 /* Contato.m */; };
+		C06D09961F68B07D00E3C9BC /* ContatoDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06D09951F68B07D00E3C9BC /* ContatoDao.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		C02B1DD61F689F5C009F9465 /* ContatosIP67-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ContatosIP67-Bridging-Header.h"; sourceTree = "<group>"; };
 		C02B1DD71F689F5C009F9465 /* Contato.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contato.h; sourceTree = "<group>"; };
 		C02B1DD81F689F5C009F9465 /* Contato.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contato.m; sourceTree = "<group>"; };
+		C06D09951F68B07D00E3C9BC /* ContatoDao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContatoDao.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				C02B1DC11F689732009F9465 /* AppDelegate.swift */,
 				C02B1DC31F689732009F9465 /* FormularioContatoViewController.swift */,
 				C02B1DC51F689732009F9465 /* Main.storyboard */,
+				C06D09951F68B07D00E3C9BC /* ContatoDao.swift */,
 				C02B1DCB1F689732009F9465 /* Assets.xcassets */,
 				C02B1DCD1F689732009F9465 /* LaunchScreen.storyboard */,
 				C02B1DD01F689732009F9465 /* Info.plist */,
@@ -149,6 +152,7 @@
 			files = (
 				C02B1DD91F689F5C009F9465 /* Contato.m in Sources */,
 				C02B1DC41F689732009F9465 /* FormularioContatoViewController.swift in Sources */,
+				C06D09961F68B07D00E3C9BC /* ContatoDao.swift in Sources */,
 				C02B1DCA1F689732009F9465 /* ContatosIP67.xcdatamodeld in Sources */,
 				C02B1DC21F689732009F9465 /* AppDelegate.swift in Sources */,
 			);
@@ -315,6 +319,7 @@
 				C02B1DD51F689732009F9465 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
