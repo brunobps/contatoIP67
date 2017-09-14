@@ -10,7 +10,10 @@ import UIKit
 
 class FormularioContatoViewController: UIViewController {
 
+    //Declaração de variáveis
     var dao:ContatoDao
+    var contato:Contato!
+    
     
     required init?(coder aDecoder: NSCoder){
         self.dao = ContatoDao.sharedInstance()
@@ -22,27 +25,50 @@ class FormularioContatoViewController: UIViewController {
     @IBOutlet var endereco: UITextField!
     @IBOutlet var site: UITextField!
     
-    @IBAction func pegaDadosFormulario(){
-        
-        let contato: Contato = Contato()
-        
-        contato.nome = self.nome.text!
-        contato.telefone = self.telefone.text!
-        contato.endereco = self.endereco.text!
-        contato.site = self.site.text!
-        
+    @IBAction func criarContato(){
+        self.pegaDadosFormulario()
         dao.adiciona(contato)
+        _ = self.navigationController?.popViewController(animated: true)
         
+        //Apenas imprime para validar os dados
+        //print(self.contato)
         for contato in dao.contatos {
-            print(contato)
+         print(contato)
+         }
+    }
+    
+    func pegaDadosFormulario(){
+        
+        if contato == nil{
+            self.contato = Contato()
         }
+        
+        self.contato.nome = self.nome.text!
+        self.contato.telefone = self.telefone.text!
+        self.contato.endereco = self.endereco.text!
+        self.contato.site = self.site.text!
         
     }
 
-    
+    //Metodo chamado toda vez que o formulario é carregado pela primeira vez
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        // Mostrar contato na tela.
+        if contato != nil {
+            self.nome.text = contato.nome
+            self.telefone.text = contato.telefone
+            self.endereco.text = contato.endereco
+            self.site.text = contato.site
+            
+            let botaoAlterar = UIBarButtonItem(title: "Confirmar", style: .plain, target: self, action: #selector(atualizaContato))
+            self.navigationItem.rightBarButtonItem = botaoAlterar
+        }
+        
+    }
+    
+    func atualizaContato(){
+        pegaDadosFormulario()
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     override func didReceiveMemoryWarning() {

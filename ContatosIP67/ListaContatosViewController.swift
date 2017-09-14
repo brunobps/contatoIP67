@@ -10,42 +10,66 @@ import UIKit
 
 class ListaContatosViewController: UITableViewController {
 
+    var dao:ContatoDao
+    static let cellIdentifier = "Cell"
+    
+    //Inicialização dos Objetos
+    required init?(coder aDecoder: NSCoder) {
+        self.dao = ContatoDao.sharedInstance()
+        super.init(coder: aDecoder)
+    }
+    
+    //Ao Carregar a lista pela primeira vez
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationItem.leftBarButtonItem = self.editButtonItem
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+    //Toda vez que a lista é apresentada
+    override func viewDidAppear(_ animated: Bool) {
+        self.tableView.reloadData()
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
+    //Número de sessões
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
-
+    
+    //Numero de linhas da sessão
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return dao.listaTodos().count
     }
 
-    /*
+    //Metodo para vincular valores às celulas da lista
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        var cell:UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: ListaContatosViewController.cellIdentifier)
 
-        // Configure the cell...
-
-        return cell
+        let contato:Contato = self.dao.buscaContatoNaPosicao(indexPath.row)
+        
+        // A Opção Style muda o tipo da lista. Verificar ENUM
+        if cell==nil{
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: ListaContatosViewController.cellIdentifier)
+        }
+        
+        cell!.textLabel?.text = contato.nome
+        cell!.detailTextLabel?.text = contato.telefone
+        
+        return cell!
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -55,18 +79,41 @@ class ListaContatosViewController: UITableViewController {
     }
     */
 
-    /*
-    // Override to support editing the table view.
+    
+    //Metodo para iterações com a lista
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            self.dao.remove(indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+        
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
-
+    
+    //Método acionado ao clicar em um item da lista.
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let contatoSelecionado = dao.buscaContatoNaPosicao(indexPath.row)
+        print("Nome: \(contatoSelecionado.nome)")
+        
+        self.exibeFormulario(contatoSelecionado)
+        
+    }
+    
+    func exibeFormulario(_ contato:Contato){
+        
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        //O identificador Form-Contato foi definido diretamente no StoryBoard
+        let formulario = storyboard.instantiateViewController(withIdentifier: "Form-Contato") as! FormularioContatoViewController
+        
+        formulario.contato = contato
+        
+        self.navigationController?.pushViewController(formulario, animated: true)
+        
+    }
+    
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {

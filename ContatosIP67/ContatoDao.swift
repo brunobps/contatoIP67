@@ -13,6 +13,7 @@ class ContatoDao: NSObject {
     
     //Singleton= garante uma unica instancia da classe.
     static private var defaultDAO: ContatoDao!
+    
     static func sharedInstance() -> ContatoDao{
         
         if defaultDAO == nil {
@@ -25,6 +26,18 @@ class ContatoDao: NSObject {
     
     func adiciona(_ contato:Contato){
         contatos.append(contato)
+    }
+    
+    func listaTodos() -> [Contato]{
+        return contatos
+    }
+    
+    func buscaContatoNaPosicao(_ posicao:Int) -> Contato {
+        return contatos[posicao]
+    }
+    
+    func remove(_ posicao:Int){
+        contatos.remove(at:posicao)
     }
     
     override private init(){
