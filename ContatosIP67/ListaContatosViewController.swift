@@ -95,7 +95,7 @@ class ListaContatosViewController: UITableViewController {
     //Método acionado ao clicar em um item da lista.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contatoSelecionado = dao.buscaContatoNaPosicao(indexPath.row)
-        print("Nome: \(contatoSelecionado.nome)")
+        print("Nome: \(contatoSelecionado.nome!)")
         
         self.exibeFormulario(contatoSelecionado)
         
@@ -110,6 +110,7 @@ class ListaContatosViewController: UITableViewController {
         
         formulario.contato = contato
         
+        //Quando na hierarquia é chamado uma pagina posterior utiliza PUSH, quando anterior é POP.
         self.navigationController?.pushViewController(formulario, animated: true)
         
     }

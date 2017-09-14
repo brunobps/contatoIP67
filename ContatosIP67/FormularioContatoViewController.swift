@@ -60,6 +60,7 @@ class FormularioContatoViewController: UIViewController {
             self.endereco.text = contato.endereco
             self.site.text = contato.site
             
+            //Altera dinamicamente o botão adicionar para confirmar, caso o objeto contato esteja preenchido.
             let botaoAlterar = UIBarButtonItem(title: "Confirmar", style: .plain, target: self, action: #selector(atualizaContato))
             self.navigationItem.rightBarButtonItem = botaoAlterar
         }
