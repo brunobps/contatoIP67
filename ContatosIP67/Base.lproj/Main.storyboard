@@ -121,7 +121,7 @@
                     <navigationItem key="navigationItem" title="Contatos" id="bC7-ee-7r3">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Q2Q-8Y-baC">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" id="qZb-dP-vwm"/>
+                                <segue destination="BYZ-38-t0r" kind="show" identifier="FormSegue" id="qZb-dP-vwm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

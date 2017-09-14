@@ -13,7 +13,7 @@ class FormularioContatoViewController: UIViewController {
     //Declaração de variáveis
     var dao:ContatoDao
     var contato:Contato!
-    
+    var delegate:FormularioContatoViewControllerDelegate?
     
     required init?(coder aDecoder: NSCoder){
         self.dao = ContatoDao.sharedInstance()
@@ -28,6 +28,10 @@ class FormularioContatoViewController: UIViewController {
     @IBAction func criarContato(){
         self.pegaDadosFormulario()
         dao.adiciona(contato)
+        
+        //aciona delegate
+        self.delegate?.contatoAdicionado(contato)
+        
         _ = self.navigationController?.popViewController(animated: true)
         
         //Apenas imprime para validar os dados
@@ -69,6 +73,9 @@ class FormularioContatoViewController: UIViewController {
     
     func atualizaContato(){
         pegaDadosFormulario()
+        //aciona delegate
+        self.delegate?.contatoAtualizado(contato)
+        
         _ = self.navigationController?.popViewController(animated: true)
     }
     

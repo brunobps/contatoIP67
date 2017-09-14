@@ -8,10 +8,12 @@
 
 import UIKit
 
-class ListaContatosViewController: UITableViewController {
+//Implementando o delegate.
+class ListaContatosViewController: UITableViewController, FormularioContatoViewControllerDelegate {
 
     var dao:ContatoDao
     static let cellIdentifier = "Cell"
+    var linhaDestaque: IndexPath?
     
     //Inicialização dos Objetos
     required init?(coder aDecoder: NSCoder) {
@@ -33,6 +35,20 @@ class ListaContatosViewController: UITableViewController {
     //Toda vez que a lista é apresentada
     override func viewDidAppear(_ animated: Bool) {
         self.tableView.reloadData()
+        
+        if let linha = self.linhaDestaque {
+            //seleciona a linha
+            self.tableView.selectRow(at: linha, animated: true, scrollPosition: .middle)
+            
+            //Cria uma thread assincrona que aguarda 1 segundo para deselecionar a linha
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)){
+                
+                //deseleciona a linha
+                self.tableView.deselectRow(at: linha, animated: true)
+                self.linhaDestaque = Optional.none
+            }
+        }
+        
     }
 
 
@@ -108,11 +124,24 @@ class ListaContatosViewController: UITableViewController {
         //O identificador Form-Contato foi definido diretamente no StoryBoard
         let formulario = storyboard.instantiateViewController(withIdentifier: "Form-Contato") as! FormularioContatoViewController
         
+        //habilita o delegate
+        formulario.delegate = self
         formulario.contato = contato
         
         //Quando na hierarquia é chamado uma pagina posterior utiliza PUSH, quando anterior é POP.
         self.navigationController?.pushViewController(formulario, animated: true)
         
+    }
+    
+    //Função criada no delegate
+    func contatoAtualizado(_ contato: Contato) {
+        self.linhaDestaque = IndexPath(row: dao.buscaPosicaoDoContato(contato), section: 0)
+        print("contato atualizado: \(contato.nome)")
+    }
+    //Função criada no delegate
+    func contatoAdicionado(_ contato: Contato) {
+        self.linhaDestaque = IndexPath(row: dao.buscaPosicaoDoContato(contato), section: 0)
+        print("contato adicionado: \(contato.nome)")
     }
     
     /*
@@ -130,14 +159,19 @@ class ListaContatosViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "FormSegue"{
+            if let formulario = segue.destination as? FormularioContatoViewController {
+                formulario.delegate = self
+            }
+        }
     }
-    */
+    
 
 }

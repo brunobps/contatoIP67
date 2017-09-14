@@ -11,6 +11,11 @@ import Foundation
 
 class ContatoDao: NSObject {
     
+    override private init(){
+        self.contatos = Array()
+        super.init()
+    }
+    
     //Singleton= garante uma unica instancia da classe.
     static private var defaultDAO: ContatoDao!
     
@@ -40,9 +45,8 @@ class ContatoDao: NSObject {
         contatos.remove(at:posicao)
     }
     
-    override private init(){
-        self.contatos = Array()
-        super.init()
+    func buscaPosicaoDoContato(_ contato: Contato) -> Int {
+        return contatos.index(of: contato)!
     }
     
 }
