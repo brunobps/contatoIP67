@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormularioContatoViewController: UIViewController {
+class FormularioContatoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     //Declaração de variáveis
     var dao:ContatoDao
@@ -24,6 +24,7 @@ class FormularioContatoViewController: UIViewController {
     @IBOutlet var telefone: UITextField!
     @IBOutlet var endereco: UITextField!
     @IBOutlet var site: UITextField!
+    @IBOutlet var imageView: UIImageView!
     
     @IBAction func criarContato(){
         self.pegaDadosFormulario()
@@ -69,6 +70,8 @@ class FormularioContatoViewController: UIViewController {
             self.navigationItem.rightBarButtonItem = botaoAlterar
         }
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(selecionarFoto(sender:)))
+        self.imageView.addGestureRecognizer(tap)
     }
     
     func atualizaContato(){
@@ -77,6 +80,29 @@ class FormularioContatoViewController: UIViewController {
         self.delegate?.contatoAtualizado(contato)
         
         _ = self.navigationController?.popViewController(animated: true)
+    }
+    
+    func selecionarFoto(sender: AnyObject){
+        if UIImagePickerController.isSourceTypeAvailable(.camera){
+            //camera disponível
+        }else{
+            //vamos apresentar a biblioteca para o usuário  
+            let imagePicker = UIImagePickerController()
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.allowsEditing = true
+            imagePicker.delegate = self
+            
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+        if let imageSelecionada = info[UIImagePickerControllerEditedImage] as? UIImage {
+            self.imageView.image = imageSelecionada
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
