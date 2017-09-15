@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C00CD7AE1F6B38A900B1FCD3 /* FormularioContatoViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00CD7AD1F6B38A900B1FCD3 /* FormularioContatoViewControllerDelegate.swift */; };
+		C00CD7B01F6B553700B1FCD3 /* GerenciadorDeAcoes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00CD7AF1F6B553700B1FCD3 /* GerenciadorDeAcoes.swift */; };
 		C02B1DC21F689732009F9465 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02B1DC11F689732009F9465 /* AppDelegate.swift */; };
 		C02B1DC41F689732009F9465 /* FormularioContatoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02B1DC31F689732009F9465 /* FormularioContatoViewController.swift */; };
 		C02B1DC71F689732009F9465 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C02B1DC51F689732009F9465 /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		C00CD7AD1F6B38A900B1FCD3 /* FormularioContatoViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormularioContatoViewControllerDelegate.swift; sourceTree = "<group>"; };
+		C00CD7AF1F6B553700B1FCD3 /* GerenciadorDeAcoes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GerenciadorDeAcoes.swift; sourceTree = "<group>"; };
 		C02B1DBE1F689732009F9465 /* ContatosIP67.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContatosIP67.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C02B1DC11F689732009F9465 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C02B1DC31F689732009F9465 /* FormularioContatoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormularioContatoViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				C02B1DC31F689732009F9465 /* FormularioContatoViewController.swift */,
 				C00CD7AD1F6B38A900B1FCD3 /* FormularioContatoViewControllerDelegate.swift */,
 				C06D099B1F68C08B00E3C9BC /* ListaContatosViewController.swift */,
+				C00CD7AF1F6B553700B1FCD3 /* GerenciadorDeAcoes.swift */,
 				C02B1DC51F689732009F9465 /* Main.storyboard */,
 				C06D09951F68B07D00E3C9BC /* ContatoDao.swift */,
 				C02B1DCB1F689732009F9465 /* Assets.xcassets */,
@@ -158,6 +161,7 @@
 			files = (
 				C02B1DD91F689F5C009F9465 /* Contato.m in Sources */,
 				C02B1DC41F689732009F9465 /* FormularioContatoViewController.swift in Sources */,
+				C00CD7B01F6B553700B1FCD3 /* GerenciadorDeAcoes.swift in Sources */,
 				C00CD7AE1F6B38A900B1FCD3 /* FormularioContatoViewControllerDelegate.swift in Sources */,
 				C06D09961F68B07D00E3C9BC /* ContatoDao.swift in Sources */,
 				C06D099C1F68C08B00E3C9BC /* ListaContatosViewController.swift in Sources */,

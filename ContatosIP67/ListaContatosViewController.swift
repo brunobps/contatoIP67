@@ -30,6 +30,12 @@ class ListaContatosViewController: UITableViewController, FormularioContatoViewC
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        //Identifica quando o evento longPress é disparado
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(exibirMaisAcoes(gesture:)))
+        
+        self.tableView.addGestureRecognizer(longPress)
+        
     }
     
     //Toda vez que a lista é apresentada
@@ -162,13 +168,30 @@ class ListaContatosViewController: UITableViewController, FormularioContatoViewC
     
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    //Método executado antes de chamar uma conexão com outra tela.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        //Verificar nome da Segue, que é definido na storyboart, na propriedade da conexão
         if segue.identifier == "FormSegue"{
             if let formulario = segue.destination as? FormularioContatoViewController {
                 formulario.delegate = self
+            }
+        }
+    }
+    
+    func exibirMaisAcoes(gesture: UIGestureRecognizer) {
+        if gesture.state == .began{
+        
+            //Captura ponto na tela e usa ponto para buscar contato.
+            let ponto = gesture.location(in: self.tableView)
+            if let indexPath = self.tableView.indexPathForRow(at: ponto) {
+                let contato = self.dao.buscaContatoNaPosicao(indexPath.row)
+                
+                //instanciando o objeto gerenciadorDeAcoes
+                let acoes = GerenciadorDeAcoes(do: contato)
+                
+                //Executa metodo exibirAcoes
+                acoes.exibirAcoes(em: self)
             }
         }
     }
