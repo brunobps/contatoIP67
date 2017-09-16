@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "lista-contatos.png",
+      "filename" : "Default.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "lista-contatos@2x.png.png",
+      "filename" : "Default@2x.png.png",
       "scale" : "2x"
     },
     {
