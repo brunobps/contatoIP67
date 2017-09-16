@@ -52,6 +52,16 @@ class FormularioContatoViewController: UIViewController, UINavigationControllerD
         self.contato.telefone = self.telefone.text!
         self.contato.endereco = self.endereco.text!
         self.contato.site = self.site.text!
+        self.contato.foto = self.imageView.image
+        
+        if let foto = self.contato.foto {
+            self.imageView.image = foto
+        }
+        
+        let botaoAlterar: UIBarButtonItem = UIBarButtonItem(title: "Confirmar", style: .plain, target: self, action: #selector(atualizaContato))
+        
+        self.navigationItem.rightBarButtonItem = botaoAlterar
+        
         
     }
 
@@ -65,11 +75,16 @@ class FormularioContatoViewController: UIViewController, UINavigationControllerD
             self.endereco.text = contato.endereco
             self.site.text = contato.site
             
+            if let foto = contato.foto {
+                self.imageView.image = foto
+            }
+            
             //Altera dinamicamente o botão adicionar para confirmar, caso o objeto contato esteja preenchido.
             let botaoAlterar = UIBarButtonItem(title: "Confirmar", style: .plain, target: self, action: #selector(atualizaContato))
             self.navigationItem.rightBarButtonItem = botaoAlterar
         }
         
+        //identificando que o usuário acionou o long press da imagem
         let tap = UITapGestureRecognizer(target: self, action: #selector(selecionarFoto(sender:)))
         self.imageView.addGestureRecognizer(tap)
     }
@@ -96,7 +111,7 @@ class FormularioContatoViewController: UIViewController, UINavigationControllerD
         }
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let imageSelecionada = info[UIImagePickerControllerEditedImage] as? UIImage {
             self.imageView.image = imageSelecionada

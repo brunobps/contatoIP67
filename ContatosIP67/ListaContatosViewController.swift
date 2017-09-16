@@ -63,7 +63,7 @@ class ListaContatosViewController: UITableViewController, FormularioContatoViewC
         // Dispose of any resources that can be recreated.
     }
 
-    //Número de sessões
+    //Número de sessões da lista
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -83,11 +83,12 @@ class ListaContatosViewController: UITableViewController, FormularioContatoViewC
         
         // A Opção Style muda o tipo da lista. Verificar ENUM
         if cell==nil{
-            cell = UITableViewCell(style: .subtitle, reuseIdentifier: ListaContatosViewController.cellIdentifier)
+            cell = UITableViewCell(style: .value1, reuseIdentifier: ListaContatosViewController.cellIdentifier)
         }
         
         cell!.textLabel?.text = contato.nome
         cell!.detailTextLabel?.text = contato.telefone
+        cell!.imageView?.image = contato.foto
         
         return cell!
     }

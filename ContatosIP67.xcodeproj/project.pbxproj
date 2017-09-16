@@ -18,6 +18,8 @@
 		C02B1DD91F689F5C009F9465 /* Contato.m in Sources */ = {isa = PBXBuildFile; fileRef = C02B1DD81F689F5C009F9465 /* Contato.m */; };
 		C06D09961F68B07D00E3C9BC /* ContatoDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06D09951F68B07D00E3C9BC /* ContatoDao.swift */; };
 		C06D099C1F68C08B00E3C9BC /* ListaContatosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06D099B1F68C08B00E3C9BC /* ListaContatosViewController.swift */; };
+		C0DC14211F6CA2EA00BD42C3 /* ContatoNoMapaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DC14201F6CA2EA00BD42C3 /* ContatoNoMapaViewController.swift */; };
+		C0DC14231F6CACC500BD42C3 /* Vila Mariana.gpx in Resources */ = {isa = PBXBuildFile; fileRef = C0DC14221F6CACC500BD42C3 /* Vila Mariana.gpx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		C02B1DD81F689F5C009F9465 /* Contato.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contato.m; sourceTree = "<group>"; };
 		C06D09951F68B07D00E3C9BC /* ContatoDao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContatoDao.swift; sourceTree = "<group>"; };
 		C06D099B1F68C08B00E3C9BC /* ListaContatosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListaContatosViewController.swift; sourceTree = "<group>"; };
+		C0DC14201F6CA2EA00BD42C3 /* ContatoNoMapaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContatoNoMapaViewController.swift; sourceTree = "<group>"; };
+		C0DC14221F6CACC500BD42C3 /* Vila Mariana.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Vila Mariana.gpx"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,7 @@
 				C02B1DC11F689732009F9465 /* AppDelegate.swift */,
 				C02B1DC31F689732009F9465 /* FormularioContatoViewController.swift */,
 				C00CD7AD1F6B38A900B1FCD3 /* FormularioContatoViewControllerDelegate.swift */,
+				C0DC14201F6CA2EA00BD42C3 /* ContatoNoMapaViewController.swift */,
 				C06D099B1F68C08B00E3C9BC /* ListaContatosViewController.swift */,
 				C00CD7AF1F6B553700B1FCD3 /* GerenciadorDeAcoes.swift */,
 				C02B1DC51F689732009F9465 /* Main.storyboard */,
@@ -82,6 +87,7 @@
 				C02B1DD71F689F5C009F9465 /* Contato.h */,
 				C02B1DD81F689F5C009F9465 /* Contato.m */,
 				C02B1DD61F689F5C009F9465 /* ContatosIP67-Bridging-Header.h */,
+				C0DC14221F6CACC500BD42C3 /* Vila Mariana.gpx */,
 			);
 			path = ContatosIP67;
 			sourceTree = "<group>";
@@ -148,6 +154,7 @@
 			files = (
 				C02B1DCF1F689732009F9465 /* LaunchScreen.storyboard in Resources */,
 				C02B1DCC1F689732009F9465 /* Assets.xcassets in Resources */,
+				C0DC14231F6CACC500BD42C3 /* Vila Mariana.gpx in Resources */,
 				C02B1DC71F689732009F9465 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,6 +166,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0DC14211F6CA2EA00BD42C3 /* ContatoNoMapaViewController.swift in Sources */,
 				C02B1DD91F689F5C009F9465 /* Contato.m in Sources */,
 				C02B1DC41F689732009F9465 /* FormularioContatoViewController.swift in Sources */,
 				C00CD7B01F6B553700B1FCD3 /* GerenciadorDeAcoes.swift in Sources */,

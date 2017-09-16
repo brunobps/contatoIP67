@@ -8,6 +8,7 @@
 
 import Foundation
 
+//protocolo para comunicação com o delegate, que nada mais é que chamar um método remotamente.
 protocol FormularioContatoViewControllerDelegate {
     
     func contatoAdicionado(_ contato:Contato)
