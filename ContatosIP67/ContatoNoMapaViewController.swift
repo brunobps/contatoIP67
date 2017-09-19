@@ -91,6 +91,4 @@ class ContatosNoMapaViewController: UIViewController, MKMapViewDelegate {
         mapView.setRegion(region, animated: true)
     }
     
-    mapview
-    
 }
