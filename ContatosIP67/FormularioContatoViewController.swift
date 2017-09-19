@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class FormularioContatoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
@@ -24,7 +25,13 @@ class FormularioContatoViewController: UIViewController, UINavigationControllerD
     @IBOutlet var telefone: UITextField!
     @IBOutlet var endereco: UITextField!
     @IBOutlet var site: UITextField!
+    
     @IBOutlet var imageView: UIImageView!
+    
+    @IBOutlet var latitude: UITextField!
+    @IBOutlet var longitude: UITextField!
+    
+    @IBOutlet weak var loading: UIActivityIndicatorView!
     
     @IBAction func criarContato(){
         self.pegaDadosFormulario()
@@ -58,6 +65,14 @@ class FormularioContatoViewController: UIViewController, UINavigationControllerD
             self.imageView.image = foto
         }
         
+        if let latitude = Double(self.latitude.text!){
+            self.contato.latitude = latitude as NSNumber
+        }
+        
+        if let longitude = Double(self.longitude.text!){
+            self.contato.longitude = longitude as NSNumber
+        }
+        
         let botaoAlterar: UIBarButtonItem = UIBarButtonItem(title: "Confirmar", style: .plain, target: self, action: #selector(atualizaContato))
         
         self.navigationItem.rightBarButtonItem = botaoAlterar
@@ -74,6 +89,8 @@ class FormularioContatoViewController: UIViewController, UINavigationControllerD
             self.telefone.text = contato.telefone
             self.endereco.text = contato.endereco
             self.site.text = contato.site
+            self.latitude.text = contato.latitude?.description
+            self.longitude.text = contato.longitude?.description
             
             if let foto = contato.foto {
                 self.imageView.image = foto
@@ -97,6 +114,7 @@ class FormularioContatoViewController: UIViewController, UINavigationControllerD
         _ = self.navigationController?.popViewController(animated: true)
     }
     
+    
     func selecionarFoto(sender: AnyObject){
         if UIImagePickerController.isSourceTypeAvailable(.camera){
             //camera disponível
@@ -111,6 +129,7 @@ class FormularioContatoViewController: UIViewController, UINavigationControllerD
         }
     }
     
+    //Delegate para selecionar imagem.
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let imageSelecionada = info[UIImagePickerControllerEditedImage] as? UIImage {
@@ -120,8 +139,49 @@ class FormularioContatoViewController: UIViewController, UINavigationControllerD
         picker.dismiss(animated: true, completion: nil)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    
+    @IBAction func buscarCoordenadas(sender:UIButton){
+        
+        //verifica se o endereço está nulo e apresenta alert.
+        if self.endereco.text == "" || self.endereco.text == nil {
+            //instancia o alert
+            let alertView = UIAlertController(title: "Endereço", message: "Preencha o endereço", preferredStyle: .alert)
+            //adiciona o botão ok no alert
+            let ok = UIAlertAction(title: "ok", style: .cancel, handler: nil)
+            alertView.addAction(ok)
+            //apresenta o alert na tela
+            self.present(alertView, animated: true, completion: nil)
+            
+        } else {
+            //Animação do Spinner
+            self.loading.startAnimating()
+            //desabilitar botão
+            sender.isHidden = true
+            
+            let geocoder = CLGeocoder()
+            
+            //busca coordenadas a partir do endereço
+            geocoder.geocodeAddressString(self.endereco.text!) { (resultado, error) in
+                
+                if error == nil && (resultado?.count)! > 0 {
+                    let placemark = resultado![0]
+                    let coordenada = placemark.location!.coordinate
+                    
+                    self.latitude.text = coordenada.latitude.description
+                    self.longitude.text = coordenada.longitude.description
+                    
+                    //parar animação
+                    self.loading.stopAnimating()
+                    //Habilitar botão novamente.
+                    sender.isHidden = false
+                }
+        }
+        
+        
+    }
+    
+    //override func didReceiveMemoryWarning() {
+    //    super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 }
