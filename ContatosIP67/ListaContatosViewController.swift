@@ -118,7 +118,7 @@ class ListaContatosViewController: UITableViewController, FormularioContatoViewC
     //Método acionado ao clicar em um item da lista.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contatoSelecionado = dao.buscaContatoNaPosicao(indexPath.row)
-        print("Nome: \(contatoSelecionado.nome!)")
+        //print("Nome: \(contatoSelecionado.nome!)")
         
         self.exibeFormulario(contatoSelecionado)
         
@@ -143,12 +143,16 @@ class ListaContatosViewController: UITableViewController, FormularioContatoViewC
     //Função criada no delegate
     func contatoAtualizado(_ contato: Contato) {
         self.linhaDestaque = IndexPath(row: dao.buscaPosicaoDoContato(contato), section: 0)
-        print("contato atualizado: \(contato.nome)")
+        //persiste objeto
+        dao.saveContext()
+        //print("contato atualizado: \(contato.nome)")
     }
     //Função criada no delegate
     func contatoAdicionado(_ contato: Contato) {
         self.linhaDestaque = IndexPath(row: dao.buscaPosicaoDoContato(contato), section: 0)
-        print("contato adicionado: \(contato.nome)")
+        //persiste objeto
+        dao.saveContext()
+        //print("contato adicionado: \(contato.nome)")
     }
     
     /*

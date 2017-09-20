@@ -44,15 +44,15 @@ class FormularioContatoViewController: UIViewController, UINavigationControllerD
         
         //Apenas imprime para validar os dados
         //print(self.contato)
-        for contato in dao.contatos {
-         print(contato)
-         }
+        /*for contato in dao.contatos {
+            print(contato)
+        }*/
     }
     
     func pegaDadosFormulario(){
         
         if contato == nil{
-            self.contato = Contato()
+            self.contato = dao.novoContato()
         }
         
         self.contato.nome = self.nome.text!
@@ -83,6 +83,9 @@ class FormularioContatoViewController: UIViewController, UINavigationControllerD
     //Metodo chamado toda vez que o formulario é carregado pela primeira vez
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.latitude.isEnabled = false
+        self.longitude.isEnabled = false
+        
         // Mostrar contato na tela.
         if contato != nil {
             self.nome.text = contato.nome
@@ -139,7 +142,6 @@ class FormularioContatoViewController: UIViewController, UINavigationControllerD
         picker.dismiss(animated: true, completion: nil)
     }
     
-    
     @IBAction func buscarCoordenadas(sender:UIButton){
         
         //verifica se o endereço está nulo e apresenta alert.
@@ -180,6 +182,7 @@ class FormularioContatoViewController: UIViewController, UINavigationControllerD
         
     }
     
+        
     //override func didReceiveMemoryWarning() {
     //    super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
