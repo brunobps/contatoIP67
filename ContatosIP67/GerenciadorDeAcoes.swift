@@ -41,10 +41,16 @@ class GerenciadorDeAcoes: NSObject {
             
         }
         
+        let exibirTemperatura = UIAlertAction(title: "Visualizar Clima", style: .default) { action in
+            self.exibirTemperatura()
+        }
+        
+        
         alertView.addAction(cancelar)
         alertView.addAction(ligarParaContato)
         alertView.addAction(exibirContatoNoMapa)
         alertView.addAction(exibirSiteDoContato)
+        alertView.addAction(exibirTemperatura)
         
         self.controller.present(alertView, animated: true, completion: nil)
     }
@@ -56,7 +62,7 @@ class GerenciadorDeAcoes: NSObject {
             
             //Para abrir o aplicativo, basta passar uma string separada por :. O parametro que vem antes identifica o que se pretende fazer, tel por exemplo é para ligaçao. mailto para e-mail.
             abrirAplicativo(com: "tel:" + contato.telefone)
-        }else{
+        } else{
             //Dispara alerta informando que não é possivel realizar ligações
             let alert = UIAlertController(title: "Impossível fazer ligações", message: "Seu dispositivo não é um IPHONE", preferredStyle: .alert)
             self.controller.present(alert, animated: true, completion: nil)
@@ -80,9 +86,19 @@ class GerenciadorDeAcoes: NSObject {
         abrirAplicativo(com: url)
     }
     
+    private func exibirTemperatura(){
+        
+        //vincula viewController através da tag definida
+        let temperaturaViewController = controller.storyboard?.instantiateViewController(withIdentifier: "temperaturaViewController") as! TemperaturaViewController
+        
+        //passando contato para o viewController
+        temperaturaViewController.contato = self.contato
+        
+        //Abrir página da temperatura
+        controller.navigationController?.pushViewController(temperaturaViewController, animated: true)
+    }
+    
     private func abrirAplicativo(com url:String){
         UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
     }
-    
-    
 }
