@@ -91,7 +91,7 @@ class ViewController: UIViewController {
         let urlSession = URLSession.shared
         
         // No caso do POST, temos que definir alguns parâmetros
-        let postParams: [String: Any] = ["hello": "Caelum_BR was here" as Any]
+        let postParams: [String: Any] = ["hello": "Caelum_BR was here" , "nome" : "TIqgo" as Any]
             // Mais alguns parâmetros de configuração
             request.httpMethod = "POST"
             request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
