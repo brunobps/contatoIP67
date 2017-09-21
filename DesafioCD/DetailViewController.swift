@@ -17,7 +17,11 @@ class DetailViewController: UIViewController {
         // Update the user interface for the detail item.
         if let detail = self.detailItem {
             if let label = self.detailDescriptionLabel {
-                label.text = detail.timestamp!.description
+                let dateFormatter: DateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd-MM-yyyy hh:mm:ss"
+                let dtHora = dateFormatter.string(from: detail.timestamp! as Date)
+
+                label.text = detail.device!.description + ", " + dtHora
             }
         }
     }

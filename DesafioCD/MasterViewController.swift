@@ -44,6 +44,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
              
         // If appropriate, configure the new managed object.
         newEvent.timestamp = NSDate()
+        newEvent.device = UIDevice.current.model
+        
 
         // Save the context.
         do {
@@ -110,7 +112,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     func configureCell(_ cell: UITableViewCell, withEvent event: Event) {
-        cell.textLabel!.text = event.timestamp!.description
+        let dateFormatter: DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy hh:mm:ss"
+        let dtHora = dateFormatter.string(from: event.timestamp! as Date)
+        //cell.textLabel!.text = event.device!.description + ": " + dateFormatter.date(from: event.timestamp!.description)!.description
+        cell.textLabel!.text = event.device!.description + ": " + dtHora
     }
 
     // MARK: - Fetched results controller
