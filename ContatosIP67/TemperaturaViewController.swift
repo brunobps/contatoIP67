@@ -15,8 +15,15 @@ class TemperaturaViewController: UIViewController {
     @IBOutlet weak var labelTemperaturaMaxima: UILabel!
     @IBOutlet weak var labelTemperaturaMinima: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var labelNomeContato: UILabel!
+    @IBOutlet weak var labelEnderecoContato: UILabel!
     
     var contato:Contato?
+    
+    //método chamado quando sai do form. Perda de foco.
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     //definindo url do WebService de previsão do tempo
     let URL_BASE = "http://api.openweathermap.org/data/2.5/weather?APPID=c2b9dd1aeda99cbf097c979b5200ba62&units=metric"
@@ -26,6 +33,9 @@ class TemperaturaViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Cria notificação para detectar mudança de orientação em tempo real
+        NotificationCenter.default.addObserver(self, selector: #selector(TemperaturaViewController.orientationChanged), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+
         if let contato = self.contato {
             //contatena URL com latitude e longitude
             if let endpoint = URL(string: URL_BASE + "&lat=\(contato.latitude ?? 0)&lon=\(contato.longitude ?? 0)") {
@@ -95,4 +105,23 @@ class TemperaturaViewController: UIViewController {
         }
     }
     
+    func orientationChanged() {
+        // Verifica ambiente (size classes)
+        // Carrega campos de contato apenas se estivermos num ambiente wR (Plus e iPads em landscape)
+        if sizeClass() == (UIUserInterfaceSizeClass.regular,
+                           UIUserInterfaceSizeClass.compact) {
+            labelNomeContato.text = contato?.nome
+            labelEnderecoContato.text = contato?.endereco
+        }
+    }
+    
+}
+
+// Extensão para retornar ambiente de size classes
+extension UIViewController {
+    func sizeClass() -> (UIUserInterfaceSizeClass,
+        UIUserInterfaceSizeClass) {
+            return(traitCollection.horizontalSizeClass,
+                   traitCollection.verticalSizeClass)
+    }
 }
